@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+
+    <template id="address" name="Configure eCommerce Address Fields" inherit_id="website_sale.address">
+
+        <xpath expr="//div[@id='div_email']" position="attributes">
+            <attribute name="t-if">website.use_billing_address_email</attribute>
+        </xpath>
+
+        <xpath expr="//div[@id='div_phone']" position="attributes">
+            <attribute name="t-if">mode[1] == 'billing' and website.use_billing_address_phone or mode[1] == 'shipping' and website.use_shipping_address_phone</attribute>
+        </xpath>
+        <xpath expr="//input[@name='field_required']" position="replace">
+            <input t-if="website.use_billing_address_phone" type="hidden" name="field_required" t-att-value="'phone,name'" />
+            <input t-else="" type="hidden" name="field_required" t-att-value="'name'" />
+        </xpath>
+
+        <xpath expr="//div[contains(@t-attf-class, 'div_street')]" position="attributes">
+            <attribute name="t-if">mode[1] == 'billing' and website.use_billing_address_street or mode[1] == 'shipping' and website.use_shipping_address_street</attribute>
+        </xpath>
+
+        <xpath expr="//div[contains(@t-attf-class, 'div_street2')]" position="attributes">
+            <attribute name="t-if">mode[1] == 'billing' and website.use_billing_address_street and website.use_billing_address_street2 or mode[1] == 'shipping' and website.use_shipping_address_street2</attribute>
+        </xpath>
+
+        <xpath expr="//div[contains(@t-attf-class, 'div_city')]" position="attributes">
+            <attribute name="t-if">mode[1] == 'billing' and website.use_billing_address_city or mode[1] == 'shipping' and website.use_shipping_address_city</attribute>
+        </xpath>
+
+        <xpath expr="//div[contains(@t-attf-class, 'div_state')]" position="attributes">
+            <attribute name="t-if">mode[1] == 'billing' and website.use_billing_address_state or mode[1] == 'shipping' and website.use_shipping_address_state</attribute>
+        </xpath>
+
+        <xpath expr="//t[contains(@t-if, '&lt; zip_city.index')]/div" position="attributes">
+            <attribute name="t-if">mode[1] == 'billing' and website.use_billing_address_zip or mode[1] == 'shipping' and website.use_shipping_address_zip</attribute>
+        </xpath>
+        <xpath expr="//t[contains(@t-if, '&gt; zip_city.index')]/div" position="attributes">
+            <attribute name="t-if">mode[1] == 'billing' and website.use_billing_address_zip or mode[1] == 'shipping' and website.use_shipping_address_zip</attribute>
+        </xpath>
+
+        <xpath expr="//div[contains(@t-attf-class, 'div_country')]" position="attributes">
+            <attribute name="t-if">mode[1] == 'billing' and website.use_billing_address_country or mode[1] == 'shipping' and website.use_shipping_address_country</attribute>
+        </xpath>
+
+    </template>
+
+</odoo>

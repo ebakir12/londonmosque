@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+
+    <record id="view_website_form" model="ir.ui.view">
+        <field name="name">view.website.form.inherit.website.sale.address.adjust</field>
+        <field name="model">website</field>
+        <field name="inherit_id" ref="website.view_website_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//div[@name='other']" position="after">
+                <div name="ecommerce">
+                    <group string="eCommerce" name="ecommerce">
+                        <group string="Billing Address Fields" name="billing_address" groups="sales_team.group_sale_manager">
+                            <span class="text-muted" colspan="2">Caution: by disabling the E-mail field, you can limit the ability to communicate with customers.</span>
+                            <field name="use_billing_address_email" widget="boolean_toggle" />
+                            <field name="use_billing_address_phone" widget="boolean_toggle" />
+                            <field name="use_billing_address_street" widget="boolean_toggle" />
+                            <field name="use_billing_address_street2" widget="boolean_toggle" />
+                            <field name="use_billing_address_city" widget="boolean_toggle" />
+                            <field name="use_billing_address_zip" widget="boolean_toggle" />
+                            <field name="use_billing_address_state" widget="boolean_toggle" />
+                            <field name="use_billing_address_country" widget="boolean_toggle" />
+                            <field name="default_billing_country_id" options="{'no_open': True, 'no_create': True, 'no_create_edit': True, 'no_quick_create': True}" />
+                        </group>
+                        <group string="Shipping Address Fields" name="shipping_address" groups="sales_team.group_sale_manager">
+                            <field name="use_shipping_address_phone" widget="boolean_toggle" />
+                            <field name="use_shipping_address_street" widget="boolean_toggle" />
+                            <field name="use_shipping_address_street2" widget="boolean_toggle" />
+                            <field name="use_shipping_address_city" widget="boolean_toggle" />
+                            <field name="use_shipping_address_zip" widget="boolean_toggle" />
+                            <field name="use_shipping_address_state" widget="boolean_toggle" />
+                            <field name="use_shipping_address_country" widget="boolean_toggle" />
+                        </group>
+                        <group string="Shop Grid" name="shop_grid">
+                            <field name="shop_ppg"/>
+                            <field name="shop_ppr"/>
+                        </group>
+                    </group>
+                </div>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>
