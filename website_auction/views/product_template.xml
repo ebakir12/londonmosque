@@ -19,8 +19,55 @@
         </xpath>
     </template>
 
+<!--    <template id="inherited_products_description_website_auction" name= 'Auction Timer'-->
+<!--      inherit_id="website_sale.products_item" customize_show="True">-->
+
+<!--      <xpath expr="//div[hasclass('oe_subdescription')]" position="replace">-->
+
+<!--      <t t-set="wk_auction"-->
+<!--        t-value="product._get_nondraft_auction()"/>-->
+<!--        <t t-if='wk_auction'>-->
+<!--           <div  class="text-info oe_subdescription" contenteditable="false">-->
+<!--             <div itemprop="description" t-if='product.description_sale'>-->
+<!--                <t t-esc="product.description_sale[:30]+'..' if len(product.description_sale)&gt;32 else product.description_sale"/>-->
+<!--             </div>-->
+<!--           </div>-->
+<!--            <p t-if="wk_auction">-->
+<!--                <t t-set="wk_config" t-value="wk_auction.get_publish_fields()"/>-->
+
+<!--                <span class='col-md-4' style="padding-left:0px;padding-right:0px" t-if="wk_auction.state not in ['finish','draft']">-->
+<!--                  <a class='span_total_bids' t-att-href="'/product/auction/'+str(wk_auction.id)">-->
+<!--                    <t t-esc='wk_auction.total_bids'/> Bids</a>-->
+<!--                </span>-->
+
+<!--                <span  t-att-class="'col-md-8 category_page_timer '+('auction_running' if wk_auction.state in ['confirmed','running','extend'] else 'auction_stop')"-->
+<!--                style="padding-left:0px;padding-right:0px">-->
+<!--                    <t t-if="wk_config.get('auction_yet_not_running') and website.publish_start_date">-->
+<!--                      <span>Start At&#160;</span>-->
+<!--                      <t t-raw="website._get_auction_start_time_left_countdown(wk_auction)"/>-->
+<!--                    </t>-->
+<!--                    <t t-if="wk_config.get('auction_yet_not_finish') and website.publish_end_date">-->
+<!--                      <t t-raw="website._get_auction_time_left_countdown(wk_auction)"/>-->
+<!--                      <span>&#160;&#160; left</span>-->
+<!--                    </t>-->
+<!--                </span>-->
+<!--                <div t-if='website.publish_current_price' style="position: absolute; bottom: 0; padding: 5px 0;">-->
+<!--                  <b>-->
+<!--                    Current Bid - <t t-esc='wk_auction.current_price and wk_auction.current_price or wk_auction.intial_price' t-options="{'widget': 'monetary', 'display_currency': website.currency_id}"/>-->
+<!--                  </b>-->
+<!--                </div>-->
+<!--           </p>-->
+<!--         </t>-->
+
+<!--    <div t-if="not wk_auction" class="text-info oe_subdescription" contenteditable="false">-->
+<!--            <div itemprop="description" t-field="product.description_sale"></div>-->
+<!--    </div>-->
+
+
+<!--      </xpath>-->
+<!--    </template>-->
     <template id="inherited_products_description_website_auction" name= 'Auction Timer'
-      inherit_id="website_sale.products_item" customize_show="True">
+      inherit_id="website_sale.products_description" customize_show="True">
 
       <xpath expr="//div[hasclass('oe_subdescription')]" position="replace">
 
