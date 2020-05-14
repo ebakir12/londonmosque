@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <template id="address_inherited" inherit_id="website_sale.address">
+
+            <xpath expr="//form/div/div[1]" position="replace">
+                <div t-attf-class="form-group #{error.get('first_name') and 'o_has_error' or ''} col-lg-12 div_first_name">
+                    <label class="col-form-label" for="name">First Name</label>
+                    <input type="text" name="first_name"
+                           t-attf-class="form-control #{error.get('first_name') and 'is-invalid' or ''}"
+                           t-att-value="'first_name' in checkout and checkout['first_name']"/>
+                </div>
+                <div t-attf-class="form-group #{error.get('middle_name') and 'o_has_error' or ''} col-lg-12 div_middle_name">
+                    <label class="col-form-label" for="middle_name">Middle Name</label>
+                    <input type="text" name="middle_name"
+                           t-attf-class="form-control #{error.get('middle_name') and 'is-invalid' or ''}"
+                           t-att-value="'middle_name' in checkout and checkout['middle_name']"/>
+                </div>
+                <div t-attf-class="form-group #{error.get('last_name') and 'o_has_error' or ''} col-lg-12 div_last_name">
+                    <label class="col-form-label" for="last_name">Last Name</label>
+                    <input type="text" name="last_name"
+                           t-attf-class="form-control #{error.get('last_name') and 'is-invalid' or ''}"
+                           t-att-value="'last_name' in checkout and checkout['last_name']"/>
+                </div>
+
+            </xpath>
+            <xpath expr="//div[@id='div_phone']/label" position="replace">
+                <label class="col-form-label" for="phone">Phone (+1)</label>
+            </xpath>
+        </template>
+
+    </data>
+</odoo>
