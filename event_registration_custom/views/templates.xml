@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+
+        <template id="tickeet" inherit_id="website_event.ticket">
+            <xpath expr="//div[hasclass('border-left','border-right','px-3')]" position="attributes">
+                <attribute name="t-if">not event.hide_price</attribute>
+            </xpath>
+            <xpath expr="//div[hasclass('ml-auto')]" position="attributes">
+                <attribute name="t-if">not event.hide_price</attribute>
+            </xpath>
+        </template>
+
+
+
+    </data>
+</odoo>
