@@ -27,6 +27,24 @@
                     </t>
                 </select>
             </xpath>
+
+            <xpath expr="//t[@t-set='quantity']/select[hasclass('w-auto','custom-select')]" position="replace">
+                    <select t-attf-name="nb_register-#{tickets.id}" class="w-auto custom-select">
+                        <t t-set="seats_max_ticket" t-value="(tickets.seats_availability == 'unlimited' or tickets.seats_available &gt; tickets.max_attendees) and (tickets.max_attendees + 1) or tickets.seats_available + 1"/>
+                        <t t-set="seats_max_event" t-value="(event.seats_availability == 'unlimited' or event.seats_available &gt; tickets.max_attendees) and (tickets.max_attendees + 1) or event.seats_available + 1"/>
+                        <t t-set="seats_max" t-value="min(seats_max_ticket, seats_max_event)"/>
+                        <t t-foreach="range(0, seats_max)" t-as="nb">
+                            <option t-esc="nb" t-att-selected="len(tickets) == 1 and nb == 1 and 'selected'"/>
+                        </t>
+                    </select>
+            </xpath>
+
+            <xpath expr="//t[@t-if='ticket.price or editable']" position="attributes">
+                <attribute name="t-if">(ticket.price or editable) and not event.hide_price</attribute>
+            </xpath>
+            <xpath expr="//span[@t-if='not ticket.price and not editable']" position="attributes">
+                <attribute name="t-if">not ticket.price and not editable and not event.hide_price</attribute>
+            </xpath>
         </template>
 
     </data>
