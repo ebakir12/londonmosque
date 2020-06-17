@@ -41,7 +41,7 @@ class WebsiteEventControllerInherit(WebsiteEventSaleController):
         registrations = self._process_registration_details(post)
         invalid_registrations = self.check_registrations(registrations,event)
         if invalid_registrations:
-            return self.registration_new(event, **post)
+            return request.render('event_registration_custom.hello_tmp',{'event':event})
         order = request.website.sale_get_order(force_create=1)
         attendee_ids = set()
 

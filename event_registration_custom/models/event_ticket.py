@@ -8,8 +8,7 @@ import logging
 LOGGER = logging.getLogger(__name__)
 
 
-class Event(models.Model):
-    _inherit = 'event.event'
+class EventEventTicket(models.Model):
+    _inherit = 'event.event.ticket'
 
-    hide_price = fields.Boolean()
-    # hide_qty = fields.Boolean()
+    max_attendees = fields.Integer(default=1)

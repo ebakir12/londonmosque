@@ -4,15 +4,30 @@
 
 
         <template id="tickeet" inherit_id="website_event.ticket">
+
             <xpath expr="//div[hasclass('border-left','border-right','px-3')]" position="attributes">
                 <attribute name="t-if">not event.hide_price</attribute>
             </xpath>
-            <xpath expr="//div[hasclass('ml-auto')]" position="attributes">
-                <attribute name="t-if">not event.hide_price</attribute>
-            </xpath>
+            <!--            <xpath expr="//div[hasclass('ml-auto')]" position="attributes">-->
+            <!--                <attribute name="t-if">not event.hide_qty</attribute>-->
+            <!--            </xpath>-->
         </template>
 
+        <template id="registration_template" inherit_id="website_event_sale.registration_template">
 
+            <xpath expr="//select[hasclass('w-auto','ml-auto','custom-select')]" position="replace">
+                <select t-attf-name="nb_register-#{ticket.id}" class="w-auto ml-auto custom-select">
+                    <t t-set="seats_max_ticket"
+                       t-value="(ticket.seats_availability == 'unlimited' or ticket.seats_available &gt; ticket.max_attendees) and (ticket.max_attendees + 1) or ticket.seats_available + 1"/>
+                    <t t-set="seats_max_event"
+                       t-value="(event.seats_availability == 'unlimited' or event.seats_available &gt; ticket.max_attendees) and (ticket.max_attendees + 1) or event.seats_available + 1"/>
+                    <t t-set="seats_max" t-value="min(seats_max_ticket, seats_max_event)"/>
+                    <t t-foreach="range(0, seats_max)" t-as="nb">
+                        <option t-esc="nb" t-att-selected="len(ticket) == 0 and nb == 0 and 'selected'"/>
+                    </t>
+                </select>
+            </xpath>
+        </template>
 
     </data>
 </odoo>

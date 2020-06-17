@@ -16,7 +16,7 @@
     'version': '0.1',
 
     # any module necessary for this one to work correctly
-    'depends': ['event','website_event'],
+    'depends': ['event','event_sale','website_event'],
 
     # always loaded
     'data': [
