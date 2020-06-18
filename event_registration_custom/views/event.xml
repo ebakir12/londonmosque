@@ -20,6 +20,20 @@
                  
              </field>
          </record>
+        
+         
+         <record id="view_event_question_form" model="ir.ui.view">
+             <field name="name">event.question.form.inherit</field>
+             <field name="model">event.question</field>
+             <field name="inherit_id" ref="website_event_questions.view_event_question_form"/>
+             <field name="arch" type="xml">
+                 
+                 <xpath expr="//field[@name='answer_ids']/tree/field[@name='name']" position="after">
+                      <field name="prevent_submit" />
+                 </xpath>
+                 
+             </field>
+         </record>
     
     </data>
 </odoo>
