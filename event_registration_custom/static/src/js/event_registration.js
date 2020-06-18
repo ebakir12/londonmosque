@@ -46,7 +46,7 @@ var _t = core._t;
         if(repeated_emails.length){
             valid = false;
             var repeated_str = repeated_emails.join(' - ');
-            alert('Some emails are repeated: ' + repeated_str);
+            alert('You are already registered under ' + repeated_str + ' for this event .. Maximum 1 registration per person is allowed.');
         }else{
             var form_action = form['action'];
             var event_str = form_action.split('/')[4];
@@ -58,13 +58,13 @@ var _t = core._t;
                     if(repeated_emails.length){
                         var repeated_str = repeated_emails.join(' - ');
                         valid = false;
-                        alert('Email already registered: ' + repeated_str);
+                        alert('You are already registered under ' + repeated_str + ' for this event .. Maximum 1 registration per person is allowed.');
                     }
                     if(invalid_answers.length){
                         valid = false;
                         for(var k = 0 ; k < invalid_answers.length ; k++){
                             var option = answer_elem[invalid_answers[k]];
-                            $($(option).parent()).after('<span="invalid-error" style="color:red;" class="invalid-answer">This Answer Disabled You To Continue.</span>');;
+                            $($(option).parent()).after('<span="invalid-error" style="color:red;" class="invalid-answer">With this answer you are not eligible to Register.</span>');;
                         }
                     }
 
