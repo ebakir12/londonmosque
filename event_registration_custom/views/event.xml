@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        
+         
+         <record id="view_event_event_form_inherit" model="ir.ui.view">
+             <field name="name">event.event.form.inherit</field>
+             <field name="model">event.event</field>
+             <field name="inherit_id" ref="event.view_event_form"/>
+             <field name="arch" type="xml">
+                 
+                 <xpath expr="//field[@name='auto_confirm']" position="after">
+                      <field name="hide_price" />
+<!--                      <field name="hide_qty" />-->
+                 </xpath>
+
+                 <xpath expr="//field[@name='event_ticket_ids']/tree/field[@name='price']" position="after">
+                     <field name="max_attendees" />
+                 </xpath>
+                 
+             </field>
+         </record>
+        
+         
+         <record id="view_event_question_form" model="ir.ui.view">
+             <field name="name">event.question.form.inherit</field>
+             <field name="model">event.question</field>
+             <field name="inherit_id" ref="website_event_questions.view_event_question_form"/>
+             <field name="arch" type="xml">
+                 
+                 <xpath expr="//field[@name='answer_ids']/tree/field[@name='name']" position="after">
+                      <field name="prevent_submit" />
+                 </xpath>
+                 
+             </field>
+         </record>
+    
+    </data>
+</odoo>

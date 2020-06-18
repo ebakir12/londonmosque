@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+
+        <template id="tickeet" inherit_id="website_event.ticket">
+
+            <xpath expr="//div[hasclass('border-left','border-right','px-3')]" position="attributes">
+                <attribute name="t-if">not event.hide_price</attribute>
+            </xpath>
+            <!--            <xpath expr="//div[hasclass('ml-auto')]" position="attributes">-->
+            <!--                <attribute name="t-if">not event.hide_qty</attribute>-->
+            <!--            </xpath>-->
+        </template>
+
+        <template id="registration_template" inherit_id="website_event_sale.registration_template">
+
+            <xpath expr="//select[hasclass('w-auto','ml-auto','custom-select')]" position="replace">
+                <select t-attf-name="nb_register-#{ticket.id}" class="w-auto ml-auto custom-select">
+                    <t t-set="seats_max_ticket"
+                       t-value="(ticket.seats_availability == 'unlimited' or ticket.seats_available &gt; ticket.max_attendees) and (ticket.max_attendees + 1) or ticket.seats_available + 1"/>
+                    <t t-set="seats_max_event"
+                       t-value="(event.seats_availability == 'unlimited' or event.seats_available &gt; ticket.max_attendees) and (ticket.max_attendees + 1) or event.seats_available + 1"/>
+                    <t t-set="seats_max" t-value="min(seats_max_ticket, seats_max_event)"/>
+                    <t t-foreach="range(0, seats_max)" t-as="nb">
+                        <option t-esc="nb" t-att-selected="len(ticket) == 0 and nb == 0 and 'selected'"/>
+                    </t>
+                </select>
+            </xpath>
+
+            <xpath expr="//t[@t-set='quantity']/select[hasclass('w-auto','custom-select')]" position="replace">
+                <select t-attf-name="nb_register-#{tickets.id}" class="w-auto custom-select">
+                    <t t-set="seats_max_ticket"
+                       t-value="(tickets.seats_availability == 'unlimited' or tickets.seats_available &gt; tickets.max_attendees) and (tickets.max_attendees + 1) or tickets.seats_available + 1"/>
+                    <t t-set="seats_max_event"
+                       t-value="(event.seats_availability == 'unlimited' or event.seats_available &gt; tickets.max_attendees) and (tickets.max_attendees + 1) or event.seats_available + 1"/>
+                    <t t-set="seats_max" t-value="min(seats_max_ticket, seats_max_event)"/>
+                    <t t-foreach="range(0, seats_max)" t-as="nb">
+                        <option t-esc="nb" t-att-selected="len(tickets) == 1 and nb == 1 and 'selected'"/>
+                    </t>
+                </select>
+            </xpath>
+
+            <xpath expr="//t[@t-if='ticket.price or editable']" position="attributes">
+                <attribute name="t-if">(ticket.price or editable) and not event.hide_price</attribute>
+            </xpath>
+            <xpath expr="//span[@t-if='not ticket.price and not editable']" position="attributes">
+                <attribute name="t-if">not ticket.price and not editable and not event.hide_price</attribute>
+            </xpath>
+        </template>
+
+        <template id="registration_attendee_details" inherit_id="website_event.registration_attendee_details">
+            <xpath expr="//button[hasclass('btn','btn-primary')]" position="attributes">
+                <attribute name="class">btn btn-primary btn-form</attribute>
+            </xpath>
+        </template>
+
+        <template id="assets_frontend" inherit_id="website.assets_frontend" name="Event Assets Frontend Registration">
+            <xpath expr="//script[last()]" position="after">
+                <script type="text/javascript" src="/event_registration_custom/static/src/js/event_registration.js"></script>
+            </xpath>
+        </template>
+
+<!--        <template id="registration_attendee_details_questions" inherit_id="website_event_questions.registration_attendee_details_questions">-->
+<!--            <xpath expr="//option" position="replace">-->
+<!--                <option t-esc="answer.name" t-att-value="answer.id" t-att-data-enbl="answer.id if answer.prevent_submit else 0"/>-->
+<!--            </xpath>-->
+<!--            <xpath expr="//div[@t-foreach='event.general_question_ids']/div/select/t/option" position="replace">-->
+<!--                <option t-esc="answer.name" t-att-value="answer.id" t-att-data-enbl="answer.id if answer.prevent_submit else 0"/>-->
+<!--            </xpath>-->
+<!--        </template>-->
+
+    </data>
+</odoo>
