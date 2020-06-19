@@ -64,7 +64,7 @@ var _t = core._t;
                         valid = false;
                         for(var k = 0 ; k < invalid_answers.length ; k++){
                             var option = answer_elem[invalid_answers[k]];
-                            $($(option).parent()).after('<span="invalid-error" style="color:red;" class="invalid-answer">With this answer you are not eligible to Register.</span>');;
+                            $($(option).parent()).after('<span="invalid-error" style="color:red;" class="invalid-answer">With this answer you are not eligible to Register.</span>');
                         }
                     }
 
