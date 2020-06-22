@@ -31,7 +31,13 @@
                  <xpath expr="//field[@name='answer_ids']/tree/field[@name='name']" position="after">
                       <field name="prevent_submit" />
                  </xpath>
-                 
+
+                 <xpath expr="//label[@for='is_individual']" position="after">
+                     <label for="wrong_answer_text" />
+                     <field name="wrong_answer_text" required="True"/>
+
+                 </xpath>
+
              </field>
          </record>
     

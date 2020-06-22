@@ -12,3 +12,9 @@ class EventAnswer(models.Model):
     _inherit = 'event.answer'
 
     prevent_submit = fields.Boolean()
+
+
+class EventQuestion(models.Model):
+    _inherit = 'event.question'
+
+    wrong_answer_text = fields.Char(string="", )
