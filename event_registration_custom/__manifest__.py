@@ -20,6 +20,7 @@
 
     # always loaded
     'data': [
+        'data/data.xml',
         'views/event.xml',
         'views/templates.xml',
     ],
