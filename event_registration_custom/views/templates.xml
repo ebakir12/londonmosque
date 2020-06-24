@@ -53,22 +53,46 @@
             <xpath expr="//button[hasclass('btn','btn-primary')]" position="attributes">
                 <attribute name="class">btn btn-primary btn-form</attribute>
             </xpath>
+
+            <xpath expr="//input[@type='tel']" position="attributes">
+                <attribute name="required">his field is required</attribute>
+            </xpath>
+
+            <xpath expr="//div[hasclass('col-lg','my-2')]" position="replace">
+                <div class="col-lg my-2">
+                    <label>First Name</label>
+                    <input class="form-control" type="text" t-attf-name="#{counter}-first_name"
+                           required="This field is required"/>
+                </div>
+                <div class="col-lg my-2">
+                    <label>Last Name</label>
+                    <input class="form-control" type="text" t-attf-name="#{counter}-last_name"
+                           required="This field is required"/>
+                </div>
+            </xpath>
+
         </template>
 
         <template id="assets_frontend" inherit_id="website.assets_frontend" name="Event Assets Frontend Registration">
             <xpath expr="//script[last()]" position="after">
-                <script type="text/javascript" src="/event_registration_custom/static/src/js/event_registration.js"></script>
+                <script type="text/javascript"
+                        src="/event_registration_custom/static/src/js/event_registration.js"></script>
             </xpath>
         </template>
 
-<!--        <template id="registration_attendee_details_questions" inherit_id="website_event_questions.registration_attendee_details_questions">-->
-<!--            <xpath expr="//option" position="replace">-->
-<!--                <option t-esc="answer.name" t-att-value="answer.id" t-att-data-enbl="answer.id if answer.prevent_submit else 0"/>-->
-<!--            </xpath>-->
-<!--            <xpath expr="//div[@t-foreach='event.general_question_ids']/div/select/t/option" position="replace">-->
-<!--                <option t-esc="answer.name" t-att-value="answer.id" t-att-data-enbl="answer.id if answer.prevent_submit else 0"/>-->
-<!--            </xpath>-->
-<!--        </template>-->
+        <template id="registration_attendee_details_questions"
+                  inherit_id="website_event_questions.registration_attendee_details_questions">
+            <xpath expr="//select" position="after">
+                <span style="color:red;" class="invalid-answer o_hidden">
+                    <t t-esc="question.wrong_answer_text"/>
+                </span>
+            </xpath>
+            <xpath expr="//div[@t-foreach='event.general_question_ids']/div/select" position="after">
+                <span style="color:red;" class="invalid-answer o_hidden">
+                    <t t-esc="question.wrong_answer_text"/>
+                </span>
+            </xpath>
+        </template>
 
     </data>
 </odoo>

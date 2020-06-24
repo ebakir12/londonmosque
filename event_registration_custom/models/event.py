@@ -13,3 +13,14 @@ class Event(models.Model):
 
     hide_price = fields.Boolean()
     # hide_qty = fields.Boolean()
+
+class EventReg(models.Model):
+    _inherit = 'event.registration'
+
+    @api.model
+    def _prepare_attendee_values(self, registration):
+        first_name = registration.get('first_name','')
+        last_name = registration.get('last_name','')
+        name = first_name + ' ' + last_name
+        registration['name'] = name
+        return super(EventReg,self)._prepare_attendee_values(registration)
