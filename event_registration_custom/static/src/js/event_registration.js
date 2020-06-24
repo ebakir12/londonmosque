@@ -60,7 +60,7 @@ var _t = core._t;
         }
 	
 
-        if(undefined !== emails[0].value && repeated_emails.length){
+        if(repeated_emails && repeated_emails.length){
             valid = false;
             var repeated_str = repeated_emails.join(' - ');
             alert('You are already using the email ' + repeated_str + ' for this event registration .. Maximum 1 registration per person is allowed.');
