@@ -27,7 +27,7 @@ var _t = core._t;
             valid = false;
             $(empty[0]).focus()
             for(var m = 0; m < empty.length ; m++){
-                $(empty[m]).after('<span style="color:red;" class="invalid-input">Please fill this field.</span>');
+                $(empty[m]).after('<span style="color:red;" class="invalid-input">This field is required.</span>');
             }
         }
 
@@ -58,6 +58,12 @@ var _t = core._t;
             }
 
         }
+	
+	if(repeated_emails.length){
+	    if(repeated_emails[0].value.length == 0){
+		 repeated_emails = [];
+		}
+	}
 
         if(repeated_emails.length){
             valid = false;
