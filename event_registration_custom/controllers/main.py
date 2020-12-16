@@ -10,7 +10,17 @@ class WebsiteEventAttendee(http.Controller):
         repeated_mails = []
         for email in emails:
             registrations = request.env['event.registration'].sudo().search([('event_id','=',event.id),('email','=',email)])
-            if registrations:
+            if event.event_group_id.num_repeated_registerations and len(registrations) >= event.event_group_id.num_repeated_registerations:
+                repeated_mails.append(email)
+        return repeated_mails
+
+    def check_other_registrations(self,emails,event):
+        repeated_mails = []
+        for email in emails:
+            event_group = event.event_group_id
+            registrations = request.env['event.registration'].sudo().search([('event_id.event_group_id','=',event_group.id),('email','=',email)])
+            events = registrations.mapped('event_id') | event
+            if event_group.restrict_num_regis and event_group.num_resgitrations < len(events):
                 repeated_mails.append(email)
         return repeated_mails
 
@@ -25,4 +35,12 @@ class WebsiteEventAttendee(http.Controller):
         answers = post.get('answers')
         invalid_answers = self.check_answers(answers,event)
         repeated_mails = self.check_registrations(emails,event)
-        return {'emails': repeated_mails,'answers':invalid_answers}
+        other_mails = self.check_other_registrations(emails,event)
+        return {
+            'emails': repeated_mails,
+            'other_mails': other_mails,
+            'answers':invalid_answers,
+            'num_repeated_registerations': event.event_group_id.num_repeated_registerations or 1,
+            'num_resgitrations': event.event_group_id.num_resgitrations or 1 ,
+            'event_group': event.event_group_id.name ,
+        }

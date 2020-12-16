@@ -20,9 +20,11 @@
 
     # always loaded
     'data': [
+        'security/ir.model.access.csv',
         'data/data.xml',
         'views/event.xml',
         'views/templates.xml',
+        'views/event_group.xml',
     ],
 
 }

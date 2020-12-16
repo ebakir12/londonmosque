@@ -27,7 +27,7 @@ var _t = core._t;
             valid = false;
             $(empty[0]).focus()
             for(var m = 0; m < empty.length ; m++){
-                $(empty[m]).after('<span style="color:red;" class="invalid-input">This field is required.</span>');
+                $(empty[m]).after('<span style="color:red;" class="invalid-input">Please fill this field.</span>');
             }
         }
 
@@ -58,13 +58,12 @@ var _t = core._t;
             }
 
         }
-	
 
-        if(repeated_emails.length){
-            valid = false;
-            var repeated_str = repeated_emails.join(' - ');
-            alert('You are already using the email ' + repeated_str + ' for this event registration .. Maximum 1 registration per person is allowed.');
-        }else{
+//        if(repeated_emails.length){
+//            valid = false;
+//            var repeated_str = repeated_emails.join(' - ');
+//            alert('You are already using the email ' + repeated_str + ' for this event registration .. Maximum 1 registration per person is allowed.');
+//        }else{
             var form_action = form['action'];
             var event_str = form_action.split('/')[4];
             var url = '/event/' + event_str + '/check_attendees_data';
@@ -73,10 +72,19 @@ var _t = core._t;
                     if(res){
                         var repeated_emails = res['emails'];
                         var invalid_answers = res['answers'];
+                        var other_mails = res['other_mails'];
+                        var num_resgitrations = res['num_resgitrations'];
+                        var num_repeated_registerations = res['num_repeated_registerations'];
+                        var event_group = res['event_group'];
                         if(repeated_emails.length){
                             var repeated_str = repeated_emails.join(' - ');
                             valid = false;
-                            alert('You are already registered under ' + repeated_str + ' for this event .. Maximum 1 registration per person is allowed.');
+                            alert('You are already registered under ' + repeated_str + ' for this event .. Maximum ' + String(num_repeated_registerations) + ' registration per person is allowed.');
+                        }
+                        if(other_mails.length){
+                            var repeated_str = other_mails.join(' - ');
+                            valid = false;
+                            alert('You are already registered under ' + repeated_str + ' for other events .. Maximum ' + String(num_resgitrations) + ' registration per events of ' + event_group + ' is allowed.');
                         }
                         if(invalid_answers.length){
                             valid = false;
@@ -96,7 +104,7 @@ var _t = core._t;
                     }
                 });
             }
-        }
+//        }
 
     })
 
