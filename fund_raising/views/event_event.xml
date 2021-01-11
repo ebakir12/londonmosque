@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+
+        <record id="view_event_event_form_inherit" model="ir.ui.view">
+            <field name="name">event.event.form.inherit</field>
+            <field name="model">event.event</field>
+            <field name="inherit_id" ref="event.view_event_form"/>
+            <field name="arch" type="xml">
+
+                <xpath expr="//notebook" position="inside">
+                    <page name="Products" string="Products">
+                        <field name="event_product_ids">
+                            <tree editable="bottom">
+                                <field name="product_id"/>
+                                <field name="multiplier"/>
+                            </tree>
+                        </field>
+                    </page>
+                </xpath>
+
+                <xpath expr="//field[@name='event_type_id']" position="after">
+                    <field name="show_fundraising"/>
+                    <field name="donation_target" attrs="{'invisible':[('show_fundraising','!=',True)]}"/>
+                </xpath>
+
+            </field>
+        </record>
+
+
+    </data>
+</odoo>

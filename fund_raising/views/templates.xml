@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="fund_raising" name="Fund Raising">
+        <t t-if="event.show_fundraising">
+            <section>
+                <div class="container">
+                    <t t-set="data" t-value="event.get_event_data()" />
+                    <div class="row sct_top_row">
+                        <div class="col-md-12 pb0 pt0">
+                            <div class="s_alert clearfix pb24 w-100 s_alert_md alert-delta" data-name="Alert" style="">
+                                <i class="fa fa-2x fa-info-circle s_alert_icon" data-original-title="" title=""
+                                   aria-describedby="tooltip801920" style="text-align: center; "/>
+                                <div class="s_alert_content">
+                                    <p>As of <t t-esc="data['date_now']" /></p>
+                                    <p>
+                                        <font style="color: rgb(32, 92, 77); font-size: 18px;">
+                                            <span style="font-weight: bolder;"><t t-esc="event.name" />:</span>
+                                        </font>
+                                        <font style="font-size: 18px;">
+                                            <span style="font-weight: bolder;">&amp;nbsp; <t t-esc="data['donors']" /> Donors | Total Raised $<t t-esc="data['total']" />
+                                                |
+                                            </span>
+                                        </font>&amp;nbsp;
+                                        <font style="font-size: 18px;">
+                                            <span style="font-weight: bolder;">Target $<t t-esc="data['target']" /> | &amp;nbsp;<t t-esc="data['raise_percent']" />% Raised
+                                            </span>
+                                        </font>
+                                    </p>
+                                </div>
+                            </div>
+                            <h2 class="section-title">
+                                <font style="color: rgb(32, 92, 77);">Our goal this year is $<t t-esc="data['target']" /></font>
+                            </h2>
+                            <h2 class="section-title">
+                                <span style="color: rgb(32, 92, 77); font-size: 18px; text-transform: uppercase;">
+                                    <i style="">Where will your money go?</i>
+                                </span>
+                                <br/>
+                            </h2>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </t>
+
+    </template>
+
+</odoo>
