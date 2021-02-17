@@ -13,6 +13,7 @@ class Event(models.Model):
 
     hide_price = fields.Boolean()
     # hide_qty = fields.Boolean()
+    event_group_id = fields.Many2one(comodel_name="event.group",)
 
 class EventReg(models.Model):
     _inherit = 'event.registration'

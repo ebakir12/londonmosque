@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        
+        <record id="view_event_group_form" model="ir.ui.view">
+            <field name="name">event.group.form</field>
+            <field name="model">event.group</field>
+            <field name="arch" type="xml">
+                <form string="MODEL">
+                    <sheet>
+                        <group>
+                            <field name="name"/>
+                            <field name="restrict_num_regis"/>
+                            <field name="num_resgitrations" attrs="{'invisible':[('restrict_num_regis','!=',True)]}"/>
+                            <field name="num_repeated_registerations" attrs="{'invisible':[('restrict_num_regis','!=',True)]}"/>
+                            <field name="num_repeated_in_form" attrs="{'invisible':[('restrict_num_regis','!=',True)]}"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+        
+        <record id="view_event_group_tree" model="ir.ui.view">
+            <field name="name">event.group.tree</field>
+            <field name="model">event.group</field>
+            <field name="arch" type="xml">
+                <tree string="MODEL">
+                    <field name="name"/>
+                </tree>
+            </field>
+        </record>
+        
+        <record id="view_event_group_action" model="ir.actions.act_window">
+            <field name="name">Event Group</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">event.group</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+        
+        <menuitem id="menu_event_group" name="Event Group" parent="event.menu_event_configuration" action="view_event_group_action" sequence="10"/>
+    
+    </data>
+</odoo>

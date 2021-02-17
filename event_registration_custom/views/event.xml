@@ -11,7 +11,10 @@
                  
                  <xpath expr="//field[@name='auto_confirm']" position="after">
                       <field name="hide_price" />
-<!--                      <field name="hide_qty" />-->
+                 </xpath>
+
+                 <xpath expr="//field[@name='event_type_id']" position="after">
+                      <field name="event_group_id" />
                  </xpath>
 
                  <xpath expr="//field[@name='event_ticket_ids']/tree/field[@name='price']" position="after">

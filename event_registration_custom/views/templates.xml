@@ -55,10 +55,11 @@
             </xpath>
 
             <xpath expr="//input[@type='tel']" position="attributes">
-                <attribute name="required">his field is required</attribute>
+                <attribute name="required">this field is required</attribute>
             </xpath>
 
             <xpath expr="//div[hasclass('col-lg','my-2')]" position="replace">
+                <div class="form_num o_hidden" hidden="1"><t t-esc="event.event_group_id.num_repeated_in_form" /></div>
                 <div class="col-lg my-2">
                     <label>First Name</label>
                     <input class="form-control" type="text" t-attf-name="#{counter}-first_name"
